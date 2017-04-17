@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TRex" default="build">
+  <property name="workspace" value="${basedir}" />
+  <property name="sourcedir" value="${basedir}/src" />
+  <property name="builddir" value="${workspace}/app/build" />
+  <property environment="env"/>
+  <target name="build"
+  depends="prepare,lint,deploy"/>
+
+  <target name="clean" description="Cleanup build artifacts">
+    <delete dir="${builddir}/api"/>
+    <delete dir="${builddir}/api"/>
+    <delete dir="${builddir}/code-browser"/>
+    <delete dir="${builddir}/coverage"/>
+    <delete dir="${builddir}/logs"/>
+  </target>
+
+  <target name="prepare" depends="clean" description="Prepare for build">
+    <mkdir dir="${builddir}/api"/>
+    <mkdir dir="${builddir}/code-browser"/>
+    <mkdir dir="${builddir}/coverage"/>
+    <mkdir dir="${builddir}/logs"/>
+  </target>
+
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <apply executable="php" failonerror="true">
+    <arg value="-l" />
+    <fileset dir="${sourcedir}">
+      <include name="**/*.php" />
+      <modified />
+    </fileset>
+    <fileset dir="${basedir}/src/">
+      <include name="**/*Test.php" />
+      <modified />
+    </fileset>
+    </apply>
+  </target>
+  
+  <target name="deploy">
+    <echo message="Running deploy" />
+    <exec dir="${env.DEPLOYER}T-Rex-Dev-Deployment/" executable="/usr/local/bin/dep" failonerror="true">
+            <arg value="deploy"/>
+            <arg value="dev"/>
+    </exec>
+  </target>
+  
+</project>

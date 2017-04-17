@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TRex" default="build">
+  <property name="workspace" value="${basedir}" />
+  <property name="sourcedir" value="${basedir}/src" />
+  <property name="builddir" value="${workspace}/app/build" />
+  <property environment="env"/>
+  <target name="build"
+  depends="prepare,lint,phpunit"/>
+
+  <target name="clean" description="Cleanup build artifacts">
+    <delete dir="${builddir}/api"/>
+    <delete dir="${builddir}/api"/>
+    <delete dir="${builddir}/code-browser"/>
+    <delete dir="${builddir}/coverage"/>
+    <delete dir="${builddir}/logs"/>
+  </target>
+
+  <target name="prepare" depends="clean" description="Prepare for build">
+    <mkdir dir="${builddir}/api"/>
+    <mkdir dir="${builddir}/code-browser"/>
+    <mkdir dir="${builddir}/coverage"/>
+    <mkdir dir="${builddir}/logs"/>
+  </target>
+
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <apply executable="php" failonerror="true">
+    <arg value="-l" />
+    <fileset dir="${sourcedir}">
+      <include name="**/*.php" />
+      <modified />
+    </fileset>
+    <fileset dir="${basedir}/src/">
+      <include name="**/*Test.php" />
+      <modified />
+    </fileset>
+    </apply>
+  </target>
+
+  <target name="phpunit" description="Run unit tests with PHPUnit">
+    <exec executable="/usr/local/bin/phpunit" failonerror="true">
+      <arg value="-c" />
+      <arg path="${basedir}/app/phpunit.xml.dist" />
+    </exec>
+  </target>
+  
+</project>
