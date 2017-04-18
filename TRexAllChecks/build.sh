@@ -1,32 +1,27 @@
 #!/bin/bash
-# My first script
-#$1 is Jenkins Home Directory
-#$2 is Jenkins Workspace Location
-#$3 Project Location from which build.xml have to pick
-#$4 Name of the build.xml
-#$5 Name of phpunit.xml.dist which is being used for build.
+ My first script
 
-printenv;
-# if [ -d "$2/build" ]; then
-#         rm -Rf $2/build
-# fi
+echo ${CUSTOM_BUILD_DIR}
+if [ -d "${WORKSPACE}/build" ]; then
+         rm -Rf ${WORKSPACE}/build
+fi
 
-# if [ -f "$2/build.xml" ]; then
-#         rm -f $2/build.xml
-# fi
+ if [ -f "${WORKSPACE}/build.xml" ]; then
+         rm -f ${WORKSPACE}/build.xml
+ fi
 
-# if [ -f "$2/phpmd.xml" ]; then
-#         rm -f $2/phpmd.xml
-# fi
+ if [ -f "${WORKSPACE}/phpmd.xml" ]; then
+         rm -f ${WORKSPACE}/phpmd.xml
+ fi
 
-# mkdir $2/build
-# cp $1/$3/$4 $2/build.xml
+ mkdir ${WORKSPACE}/build
+ cp ${CUSTOM_BUILD_DIR}/build.xml ${WORKSPACE}/build.xml
 
-# if [ ! -z "$5" ]; then
-# 	cp $1/$3/$5 $2/app/phpunit.xml.dist
-# fi
+ if [ ! -z "${WORKSPACE}" ]; then
+ 	cp ${CUSTOM_BUILD_XML}/phpunit.xml.dist ${WORKSPACE}/app/phpunit.xml.dist
+ fi
  
-# if [ -f "$1/$3/phpmd.xml" ]; then
-#         cp $1/$3/phpmd.xml $2/phpmd.xml
-# fi
+ if [ -f "${CUSTOM_BUILD_DIR}/phpmd.xml" ]; then
+         cp ${CUSTOM_BUILD_DIR}/phpmd.xml ${WORKSPACE}/phpmd.xml
+ fi
 
