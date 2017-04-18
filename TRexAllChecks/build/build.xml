@@ -9,8 +9,8 @@
   depends="prepare"/>
 
   <target name="prepare" depends="clean" description="Prepare for build">
-	<echo message="${env.DEPLOYER}">
-	<echo message="${DEPLOYER}">
+	<echo message="${env.DEPLOYER}"/>
+	<echo message="${DEPLOYER}"/>
   </target>
  
 </project>
