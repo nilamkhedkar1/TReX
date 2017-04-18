@@ -10,7 +10,6 @@
 
   <target name="prepare" description="Prepare for build">
 	<echo message="${env.DEPLOYER}"/>
-	<echo message="${DEPLOYER}"/>
   </target>
  
 </project>
